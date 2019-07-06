@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <title>jqueryMasonry</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+
+            .box {
+                background: black;
+                margin: 5px;
+            }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="http://masonry.desandro.com/masonry.pkgd.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                const masonryGrid = $('body').masonry({
+                    columnWidth: 110,
+                    itemSelector: '.box'
+                });
+
+                doMasonry = () => {
+                    for (let i = 0; i < 100; i++) {
+                        const newBox = $('<div></div>').addClass('box').css({
+                            width: 100,
+                            height: Math.floor(Math.random() * 100) + 50
+                        }).appendTo('body');
+                        masonryGrid.append(newBox).masonry('appended', newBox);
+                    }
+                }
+                doMasonry();
+
+                $(window).scroll(() => {
+                    let scrollHeight = $(window).scrollTop() + $(window).height();
+                    let documentHeight = $(document).height();
+                    if (Math.ceil(scrollHeight) === documentHeight) {
+                        doMasonry();
+                    }
+                });
+            })
+        </script>
+    </head>
+
+    <body>
+
+    </body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>autofocus 실습</title>
+    </head>
+
+    <body>
+        <input type="text" maxlength="6" />
+        <span>-</span>
+        <input type="text" maxlength="8" />
+    </body>
+
+    <script>
+        const firstInput = document.querySelectorAll('input')[0];
+        const secondInput = document.querySelectorAll('input')[1];
+
+        firstInput.onkeydown = function () {
+            if (this.value.length >= 6)
+                secondInput.focus();
+        }
+        secondInput.onkeydown = function (e) {
+            const event = e || window.event;
+            if (event.keyCode == 8 && this.value.length == 0)
+                firstInput.focus();
+        }
+    </script>
+</html>

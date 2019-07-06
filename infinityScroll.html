@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>무한 스크롤</title>
+</head>
+
+<body>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+    const appendDocument = () => {
+        for (let i = 0; i < 20; i++) {
+            $('<h1>Infinity Scroll</h1>').appendTo('body');
+        }
+    };
+    appendDocument();
+    $(window).scroll(() => {
+        let scrollHeight = $(window).scrollTop() + $(window).height();
+        let documentHeight = $(document).height();
+        if(Math.ceil(scrollHeight) === documentHeight)
+            appendDocument();
+    });
+
+</script>
+
+</html>

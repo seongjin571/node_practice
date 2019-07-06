@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>lightBox</title>
+        <link rel="stylesheet" href="jquery.lightbox.css">
+    </head>
+    <body>
+        <a class="light" href="images/image1.jpg">LightBox</a>
+        <a class="light" href="images/image2.jpg">LightBox</a>
+        <a class="light" href="images/image3.jpg">LightBox</a>
+    </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="jquery.lightbox.min.js"></script>
+    <script>
+        const a = document.getElementsByClassName('.light')[0];
+        $(a).lightBox();
+    </script>
+</html>

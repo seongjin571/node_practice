@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>프레임 애니메이션 실습</title>
+    </head>
+
+    <body>
+        <img src="" alt="달리는 애니메이션" id="image" />
+    </body>
+
+    <script>
+        let count = 0;
+        const frames = [
+            "images/0.png", "images/1.png", "images/2.png", "images/3.png", "images/4.png", "images/5.png",
+            "images/5.png", "images/6.png", "images/7.png", "images/8.png", "images/9.png", "images/10.png",
+            "images/11.png", "images/12.png", "images/13.png", "images/14.png"
+        ];
+        const image = document.querySelector("#image");
+        setInterval(() => {
+            image.src = frames[count % frames.length];
+            count += 1;
+        }, 1000 / 20);        
+    </script>
+</html>

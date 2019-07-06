@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>jquery 실습</title>
+    </head>
+
+    <body>
+
+    </body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        for(let i = 0; i < 10; i++){
+            $('<h1>Create Document Object + ' + i + '</h1>').css({
+                backgroundColor : 'black',
+                color : 'red'
+            }).appendTo('body');
+        }
+    </script>
+</html>

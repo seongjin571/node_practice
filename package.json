@@ -1,0 +1,22 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": "csacsa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seongjin571/Node.js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seongjin571/Node.js/issues"
+  },
+  "homepage": "https://github.com/seongjin571/Node.js#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
