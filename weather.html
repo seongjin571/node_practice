@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>기상청 날씨 정보 받기</title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    </script>
+</head>
+
+<body>
+    <input type="text" id="city" />
+    <button class="city-search-btn">찾기</button><br>
+    <div class="wrap">
+        <ul class="weather-ul"></ul>
+    </div>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    </script>
+    <script type="text/javascript">
+
+        const pressBbtn = document.querySelector(".city-search-btn");
+        pressBbtn.addEventListener('click', function () {
+            searchWeather();
+        });
+
+        document.querySelector('#city').onkeydown = function (e) {
+            const event = e || window.event;
+            if (event.keyCode == 13) {
+                searchWeather();
+            }
+        }
+
+        searchWeather = function () {
+            const inputVal = document.querySelector("#city").value;
+            const weatherUl = document.querySelector(".weather-ul");
+            weatherUl.innerHTML = "";
+            $.ajax({
+                url: 'http://www.kma.go.kr/weather/forecast/mid-term-rss3.jsp?stnId=108',
+                dataType: 'xml',
+                success: function (response) {
+                    $(response).find('location').each(function () {
+                        const region = $(this).find('city').text();
+                        if (region == inputVal) {
+                            weatherUl.innerHTML += "<li 'font-size : 30px;'>" + region + '</li>';
+                            $(this).find('data').each(function () {
+                                const result1 = $(this).find('tmEf').text();
+                                const result2 = $(this).find('wf').text();
+                                weatherUl.innerHTML += "<li>" + result1 + '</li>';
+                                weatherUl.innerHTML += "<li>" + result2 + '</li><br/>';
+                            })
+                        }
+                    })
+                }
+            })
+        };
+
+    </script>
+</body>
+
+</html>
+

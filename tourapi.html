@@ -1,0 +1,62 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <title> Tour Api </title>
+</head>
+
+<body>
+    <div class="container">
+
+        <label for="region-search">지역 검색</label><br /> <input type="text" id="region-search"
+            class="region-search-input" />
+        <select name="type" class="type-select">
+            <option value="32">숙박</option>
+            <option value="38">쇼핑</option>
+            <option value="12">관광지</option>
+        </select>
+        <button class="search-btn">검색</button>
+
+        <ul class="tour-info-ul"></ul>
+    </div>
+    <script type="tour-info" class="tour-info">
+        <li class="tour-info-list">
+            <img src="{imageUrl}" onerror="this.src='http://placehold.it/320x200'"/>
+            <h2>{tourName}</h2>
+            <h3>주소 : {tourLocation}</h2>
+            </li>
+    </script>
+    <script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript">
+            const searchBtn = document.querySelector('.search-btn');
+            searchBtn.addEventListener('click', function () {
+                const tourInfoUl = document.querySelector('.tour-info-ul');
+                tourInfoUl.innerHTML = "";
+                const typeId = document.querySelector('.type-select').value;
+                const regionName = document.querySelector('.region-search-input').value;
+                findTour(regionName , typeId)
+            })
+
+        function findTour(regionName ,typeId) {  
+            keyword = encodeURI(regionName, "UTF-8");
+            $.ajax({
+                url: "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchKeyword?serviceKey=RjJLwUTtegMNM%2Barsc%2BPwTW3xU4RZiJFAelIy54Z6sGrJuW36IQthQdAOLg1ZhdXbDD6H1EiuBs2IiOpL3umlQ%3D%3D&MobileApp=AppTest&MobileOS=ETC&pageNo=1&numOfRows=10&listYN=Y&arrange=A&contentTypeId="+ typeId+ "&contenttypeid=15&keyword=" + keyword + "&MobileOS=ETC&MobileApp=AppTest",
+                dataType: "json",
+                success: function (result) {
+                    result.response.body.items.item.forEach(function(e){
+                        const tourInfoUl = document.querySelector('.tour-info-ul');
+                        const templateHtml = document.querySelector('.tour-info').innerHTML;
+                        const newTemplateHtml = templateHtml.replace('{imageUrl}',e.firstimage)
+                        .replace('{tourName}',e.title)
+                        .replace('{tourLocation}',e.addr1);
+                        tourInfoUl.innerHTML += newTemplateHtml;
+                    })
+                }
+            });
+        };
+    </script>
+</body>
+
+</html>
